@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
-import { motion, useScroll, useSpring } from "motion/react"
+import { motion, useScroll, useSpring, useMotionValueEvent } from "motion/react"
 import { navLinks, site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -8,15 +8,11 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
-  const { scrollYProgress } = useScroll()
+  const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 })
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  // Drive the condensed state off Motion's scroll value, not a window listener.
+  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 24))
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : ""
@@ -62,16 +58,13 @@ export function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link, i) => (
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNav(e, link.href)}
               className="group relative font-mono text-[11px] uppercase tracking-[0.28em] text-paper/65 transition-colors hover:text-paper"
             >
-              <span className="mr-1.5 text-accent/70">
-                {String(i + 1).padStart(2, "0")}
-              </span>
               {link.label}
               <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
             </a>
@@ -81,8 +74,8 @@ export function Navbar() {
             onClick={(e) => handleNav(e, "#book")}
             className="group relative overflow-hidden border border-paper/25 px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.28em] text-paper"
           >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-ink">
-              Book Now
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-paper">
+              Book a Service
             </span>
             <span className="absolute inset-0 -translate-x-full bg-accent transition-transform duration-300 group-hover:translate-x-0" />
           </a>
@@ -102,7 +95,7 @@ export function Navbar() {
       {/* Scroll progress rule */}
       <motion.div
         style={{ scaleX: progress }}
-        className="h-px origin-left bg-accent"
+        className="h-px origin-left bg-gradient-to-r from-accent to-gold"
       />
 
       {/* Mobile menu */}
@@ -113,16 +106,14 @@ export function Navbar() {
         )}
       >
         <div className="flex flex-col px-5 py-2 sm:px-8">
-          {navLinks.map((link, i) => (
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNav(e, link.href)}
-              className="flex items-baseline gap-4 border-b border-paper/5 py-4 font-display text-2xl tracking-wide text-paper/80 transition-colors hover:text-paper"
+              className="flex items-center gap-4 border-b border-paper/5 py-4 font-display text-2xl tracking-wide text-paper/80 transition-colors hover:text-paper"
             >
-              <span className="font-mono text-[11px] tracking-[0.3em] text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+              <span className="size-1.5 rotate-45 bg-accent" />
               {link.label}
             </a>
           ))}

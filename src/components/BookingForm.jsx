@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { toast } from "sonner"
 import { ArrowRight, Loader2 } from "lucide-react"
-import { Reveal, Eyebrow, MaskReveal } from "@/components/primitives"
+import { Reveal, MaskReveal } from "@/components/primitives"
 import { services, site } from "@/lib/site"
 
 const empty = {
@@ -61,8 +61,7 @@ export function BookingForm() {
         <div className="grid gap-14 lg:grid-cols-12">
           {/* Left copy */}
           <div className="lg:col-span-5">
-            <Eyebrow index="(06)">Book A Service</Eyebrow>
-            <h2 className="mt-6 font-display text-5xl uppercase leading-[0.88] tracking-tight sm:text-7xl">
+            <h2 className="font-display text-5xl uppercase leading-[0.88] tracking-tight sm:text-7xl">
               <MaskReveal>Bring It</MaskReveal>
               <MaskReveal delay={0.1} className="text-accent">
                 In Today
@@ -70,7 +69,7 @@ export function BookingForm() {
             </h2>
             <p className="mt-7 max-w-sm text-sm leading-relaxed text-paper/60">
               Leave your details and we&apos;ll get back to confirm your
-              appointment. Consultation is free — that&apos;s the casa promise.
+              appointment. Consultation is free. That&apos;s the casa promise.
             </p>
 
             <div className="mt-10 space-y-4">
@@ -125,7 +124,7 @@ export function BookingForm() {
               <Field label="Service" error={errors.service}>
                 <select value={form.service} onChange={update("service")} className={fieldCx}>
                   <option value="" className="bg-ink">
-                    — Select —
+                    Select a service
                   </option>
                   {services.map((s) => (
                     <option key={s.title} value={s.title} className="bg-ink">
@@ -163,7 +162,7 @@ export function BookingForm() {
               <button
                 type="submit"
                 disabled={sending}
-                className="group relative col-span-full mt-2 inline-flex items-center justify-center gap-3 overflow-hidden bg-accent px-8 py-5 font-mono text-xs uppercase tracking-[0.3em] text-paper transition-colors disabled:opacity-70"
+                className="group relative col-span-full mt-2 inline-flex items-center justify-center gap-3 overflow-hidden bg-accent px-8 py-5 font-mono text-xs uppercase tracking-[0.3em] text-paper transition-[transform,background-color] duration-300 hover:bg-accent-dark active:scale-[0.99] disabled:opacity-70"
               >
                 <span className="relative z-10 flex items-center gap-3">
                   {sending ? (

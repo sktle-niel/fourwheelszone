@@ -1,10 +1,10 @@
 import { Navigation, Clock } from "lucide-react"
 import { FacebookIcon } from "@/components/icons"
-import { Reveal, Eyebrow, MaskReveal } from "@/components/primitives"
+import { Reveal, MaskReveal } from "@/components/primitives"
 import { site } from "@/lib/site"
 
 const hours = [
-  { day: "Mon – Sat", time: "8:00 AM – 6:00 PM" },
+  { day: "Mon - Sat", time: "8:00 AM - 6:00 PM" },
   { day: "Sunday", time: "By appointment" },
 ]
 
@@ -14,10 +14,7 @@ export function Visit() {
       <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <Eyebrow index="(05)" tone="ink">
-              Visit The Shop
-            </Eyebrow>
-            <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-7xl">
+            <h2 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-7xl">
               <MaskReveal>One Branch.</MaskReveal>
               <MaskReveal delay={0.1} className="text-accent">
                 One Palawan.
@@ -25,7 +22,7 @@ export function Visit() {
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-ink/60">
-            We run a single workshop in Tagburos, Puerto Princesa — no
+            We run a single workshop in Tagburos, Puerto Princesa. No
             franchises, no other locations. Drop by during business hours or
             book ahead.
           </p>
@@ -36,7 +33,7 @@ export function Visit() {
           <Reveal className="lg:col-span-7">
             <div className="h-full overflow-hidden border border-ink/15">
               <iframe
-                title="Four Wheels Zone — Tagburos, Puerto Princesa"
+                title="Four Wheels Zone, Tagburos, Puerto Princesa"
                 src={site.mapEmbed}
                 className="h-80 w-full grayscale lg:h-full lg:min-h-[30rem]"
                 loading="lazy"

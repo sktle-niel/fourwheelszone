@@ -22,7 +22,11 @@ export function Marquee() {
             <span className="font-display text-xl uppercase tracking-wide text-paper/80 sm:text-2xl">
               {label}
             </span>
-            <span className="size-1.5 rotate-45 bg-accent" />
+            <span
+              className={
+                "size-1.5 rotate-45 " + (i % 2 ? "bg-gold" : "bg-accent")
+              }
+            />
           </span>
         ))}
       </div>

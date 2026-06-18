@@ -1,10 +1,11 @@
 import { Navbar } from "@/components/Navbar"
 import { Hero } from "@/components/Hero"
+import { StatBar } from "@/components/StatBar"
 import { Marquee } from "@/components/Marquee"
 import { Services } from "@/components/Services"
+import { Cars } from "@/components/Cars"
 import { Statement } from "@/components/Statement"
 import { Maintenance } from "@/components/Maintenance"
-import { Divider } from "@/components/Divider"
 import { Workshop } from "@/components/Workshop"
 import { Visit } from "@/components/Visit"
 import { BookingForm } from "@/components/BookingForm"
@@ -18,11 +19,12 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <StatBar />
         <Marquee />
         <Services />
+        <Cars />
         <Statement />
         <Maintenance />
-        <Divider />
         <Workshop />
         <Visit />
         <BookingForm />

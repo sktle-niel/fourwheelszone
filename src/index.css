@@ -4,16 +4,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ===== Four Wheels Zone — editorial black & white system =====
-   Logo red/gold are used as accents only. */
+/* ===== Four Wheels Zone — dark editorial system =====
+   Warm near-monochrome base. Logo red leads; logo gold is the
+   second, rationed accent. Vehicle photography keeps real color. */
 @theme {
   --color-ink: #0b0b0b;
-  --color-ink-soft: #18181a;
+  --color-ink-soft: #161617;
+  --color-ink-raised: #1d1d1f;
   --color-paper: #f1efe8;
-  --color-paper-dim: #e4e1d8;
-  --color-accent: #e11d26; /* logo red */
+  --color-paper-dim: #cdc9bd;
+  --color-accent: #e21d24; /* logo red */
   --color-accent-dark: #b1141a;
-  --color-gold: #f4b400; /* logo gold */
+  --color-accent-soft: #ff5a47;
+  --color-gold: #f5b301; /* logo gold */
+  --color-gold-dark: #c98a00;
 
   --font-display: "Anton", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -27,6 +31,16 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* Honor reduced-motion: stop the looping ticker and any drift. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }
 
@@ -50,8 +64,10 @@
     --color-input: var(--input);
     --color-border: var(--border);
     --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
+    /* NOTE: shadcn's neutral `--color-accent: var(--accent)` is intentionally
+       NOT mapped here — it would clobber the brand red `--color-accent`
+       (#e21d24) defined in the @theme block above, turning every bg-accent /
+       text-accent near-white. The brand accent must win. */
     --color-muted-foreground: var(--muted-foreground);
     --color-muted: var(--muted);
     --color-secondary-foreground: var(--secondary-foreground);
@@ -167,18 +183,41 @@
     font-weight: 400;
     letter-spacing: 0.01em;
   }
-  /* Outlined display text for editorial contrast */
+  /* Outlined display text for editorial contrast.
+     Use -webkit-text-fill-color (not color) so currentColor stays the
+     real text colour and the stroke inherits it (paper on dark, ink on
+     light). Setting `color: transparent` here would also make the stroke
+     transparent and the text would vanish. */
   .text-outline {
     -webkit-text-stroke: 1.5px currentColor;
-    color: transparent;
+    -webkit-text-fill-color: transparent;
   }
   .text-outline-thin {
     -webkit-text-stroke: 1px currentColor;
-    color: transparent;
+    -webkit-text-fill-color: transparent;
   }
-  /* Unify all photography to monochrome */
+  /* Atmospheric backgrounds: warm near-monochrome. A little color
+     survives so the page reads warm, not clinical B&W. */
+  .photo-mood {
+    filter: grayscale(0.62) sepia(0.14) saturate(1.15) contrast(1.06)
+      brightness(0.84);
+  }
+  /* Vehicle / product imagery: keep real colour with an editorial punch. */
+  .photo-rich {
+    filter: saturate(1.06) contrast(1.05) brightness(0.99);
+  }
+  /* Legacy alias — kept so older refs don't break. */
   .photo-bw {
-    filter: grayscale(1) contrast(1.05) brightness(0.92);
+    filter: grayscale(0.62) sepia(0.14) saturate(1.15) contrast(1.06)
+      brightness(0.84);
+  }
+  /* Soft vignette to seat a subject on a dark stage. */
+  .stage-vignette {
+    background: radial-gradient(
+      120% 100% at 50% 38%,
+      transparent 40%,
+      rgba(11, 11, 11, 0.55) 100%
+    );
   }
   /* Subtle film grain overlay, fixed across the whole page */
   .grain::after {
