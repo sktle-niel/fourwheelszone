@@ -1,4 +1,4 @@
-import { Reveal, Eyebrow, ParallaxBg, MaskReveal } from "@/components/primitives"
+import { Reveal, ParallaxBg, MaskReveal } from "@/components/primitives"
 import { maintenance, photos } from "@/lib/site"
 
 export function Maintenance() {
@@ -25,11 +25,16 @@ export function Maintenance() {
 
         {/* Schedule list */}
         <div className="px-5 py-20 sm:px-8 lg:col-span-7 lg:py-28 lg:pl-16">
-          <Eyebrow index="(03)">Maintenance</Eyebrow>
-          <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl">
+          <h2 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl">
             <MaskReveal>Service</MaskReveal>
-            <MaskReveal delay={0.1}>Intervals</MaskReveal>
+            <MaskReveal delay={0.1} className="text-gold">
+              Intervals
+            </MaskReveal>
           </h2>
+          <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper/60">
+            Stay ahead of breakdowns. Here is how often the big systems need
+            attention to keep running strong.
+          </p>
 
           <dl className="mt-12">
             {maintenance.map((m, i) => (

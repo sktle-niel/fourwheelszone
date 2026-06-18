@@ -10,9 +10,7 @@ export function Services() {
           {/* Sticky heading */}
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
-              <Eyebrow index="(01)" tone="ink">
-                What We Do
-              </Eyebrow>
+              <Eyebrow tone="ink">What We Do</Eyebrow>
               <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl">
                 <MaskReveal>Services</MaskReveal>
                 <MaskReveal delay={0.1} className="text-accent">
@@ -20,7 +18,7 @@ export function Services() {
                 </MaskReveal>
               </h2>
               <p className="mt-6 max-w-xs text-sm leading-relaxed text-ink/60">
-                From a simple oil change to complex engine diagnostics — every
+                From a simple oil change to complex engine diagnostics, every
                 job is handled with casa-grade discipline and honest pricing.
               </p>
             </div>

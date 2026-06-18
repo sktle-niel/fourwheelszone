@@ -80,7 +80,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-paper/12 py-7 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40 sm:flex-row">
-          <p>© {new Date().getFullYear()} Four Wheels Zone — Tagburos, Palawan</p>
+          <p>© {new Date().getFullYear()} Four Wheels Zone. Tagburos, Palawan.</p>
           <p>All rights reserved</p>
         </div>
       </div>

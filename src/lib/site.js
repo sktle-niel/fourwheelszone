@@ -1,4 +1,4 @@
-// ── Photography (used full-bleed as parallax backgrounds, rendered monochrome)
+// ── Photography (full-bleed parallax backgrounds, warm near-monochrome)
 export const photos = {
   hero: "/photos/mechanic-ratchet.jpg",
   craft: "/photos/engine-bay.jpg",
@@ -6,6 +6,17 @@ export const photos = {
   rims: "/photos/rims.jpg",
   wheel: "/photos/wheel-graphic.jpg",
 }
+
+// ── Vehicles we service — real photos, kept in full colour.
+// Source + license for each file: public/cars/CREDITS.txt
+export const cars = [
+  { make: "Toyota", model: "Vios", type: "Sedan", img: "/cars/vios.jpg" },
+  { make: "Toyota", model: "Hilux", type: "Pickup", img: "/cars/hilux.jpg" },
+  { make: "Toyota", model: "Fortuner", type: "SUV", img: "/cars/fortuner.jpg" },
+  { make: "Mitsubishi", model: "Montero Sport", type: "SUV", img: "/cars/montero.jpg" },
+  { make: "Ford", model: "Ranger", type: "Pickup", img: "/cars/ranger.jpg" },
+  { make: "Toyota", model: "Innova", type: "MPV", img: "/cars/innova.jpg" },
+]
 
 // ── Core services (numbered, editorial)
 export const services = [
@@ -42,7 +53,7 @@ export const services = [
   {
     n: "06",
     title: "Diagnostics",
-    desc: "Full computerized scanning to find the root of the problem — fast and precise.",
+    desc: "Full computerized scanning to find the root of the problem, fast and precise.",
     tags: ["Scan", "Electrical", "Engine"],
   },
 ]
@@ -76,7 +87,7 @@ export const maintenance = [
   {
     title: "Turbo System Cleaning",
     sub: "Maintains turbo performance",
-    interval: "80,000–100,000 km",
+    interval: "80,000-100,000 km",
   },
   {
     title: "Under Chassis",
@@ -111,7 +122,7 @@ export const site = {
   tagline: "Alagang Casa",
   slogan: "Repair · Service · Trusted",
   facebook: "https://www.facebook.com/profile.php?id=61590429990361",
-  branchName: "Palawan — Tagburos",
+  branchName: "Tagburos, Palawan",
   address:
     "Purok Silangan, Zone 2, Barangay Tagburos, Puerto Princesa City, Palawan",
   phones: [
@@ -127,7 +138,7 @@ export const site = {
 export const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
+  { label: "Vehicles", href: "#vehicles" },
   { label: "Maintenance", href: "#maintenance" },
-  { label: "Workshop", href: "#workshop" },
   { label: "Visit", href: "#visit" },
 ]
