@@ -1,22 +1,24 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
-/* ===== Four Wheels Zone brand palette (derived from the logo) ===== */
+/* ===== Four Wheels Zone — editorial black & white system =====
+   Logo red/gold are used as accents only. */
 @theme {
-  --color-brand-red: #e11d26;
-  --color-brand-red-dark: #b01219;
-  --color-brand-gold: #f7b500;
-  --color-brand-gold-light: #ffc72c;
-  --color-brand-dark: #141414;
-  --color-brand-charcoal: #1c1c1c;
-  --color-brand-steel: #b8bcc2;
+  --color-ink: #0b0b0b;
+  --color-ink-soft: #18181a;
+  --color-paper: #f1efe8;
+  --color-paper-dim: #e4e1d8;
+  --color-accent: #e11d26; /* logo red */
+  --color-accent-dark: #b1141a;
+  --color-gold: #f4b400; /* logo gold */
 
-  --animate-marquee: marquee 32s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
+  --font-display: "Anton", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --animate-marquee: marquee 40s linear infinite;
 }
 
 @keyframes marquee {
@@ -28,19 +30,9 @@
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-heading: "Anton", sans-serif;
+    --font-sans: "Archivo", system-ui, sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -153,11 +145,49 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
+  }
   html {
-    @apply font-sans;
-    }
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-ink text-paper font-sans;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  /* Big poster display type */
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  /* Outlined display text for editorial contrast */
+  .text-outline {
+    -webkit-text-stroke: 1.5px currentColor;
+    color: transparent;
+  }
+  .text-outline-thin {
+    -webkit-text-stroke: 1px currentColor;
+    color: transparent;
+  }
+  /* Unify all photography to monochrome */
+  .photo-bw {
+    filter: grayscale(1) contrast(1.05) brightness(0.92);
+  }
+  /* Subtle film grain overlay, fixed across the whole page */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 }

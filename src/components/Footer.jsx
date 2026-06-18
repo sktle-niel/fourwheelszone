@@ -1,4 +1,4 @@
-import { MapPin, Phone, Heart } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { FacebookIcon } from "@/components/icons"
 import { site, navLinks } from "@/lib/site"
 
@@ -9,43 +9,40 @@ function scrollTo(e, href) {
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-brand-charcoal text-zinc-300">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-4">
-          {/* Brand */}
-          <div className="md:col-span-2">
+    <footer className="border-t border-paper/12 bg-ink text-paper">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+        {/* Giant wordmark */}
+        <div className="border-b border-paper/12 py-14">
+          <p className="font-display text-[clamp(2.8rem,13vw,12rem)] uppercase leading-[0.82] tracking-tight text-paper">
+            Four Wheels <span className="text-outline">Zone</span>
+          </p>
+        </div>
+
+        <div className="grid gap-10 py-14 md:grid-cols-12">
+          <div className="md:col-span-5">
             <div className="flex items-center gap-3">
-              <img
-                src="/logo.png"
-                alt="Four Wheels Zone"
-                className="h-14 w-14 object-contain"
-              />
-              <div>
-                <p className="text-lg font-extrabold uppercase tracking-wide text-white">
-                  Four Wheels <span className="text-brand-red">Zone</span>
-                </p>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold">
-                  {site.tagline}
-                </p>
-              </div>
+              <img src="/logo.png" alt="Four Wheels Zone" className="h-11 w-11 object-contain" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-paper/55">
+                {site.tagline} · {site.slogan}
+              </span>
             </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-400">
-              Maaasahang talyer sa Tagburos, Puerto Princesa. {site.slogan}.
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/55">
+              A trusted auto-repair workshop in Tagburos, Puerto Princesa City,
+              Palawan.
             </p>
           </div>
 
-          {/* Links */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest text-white">
+          <div className="md:col-span-3">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-paper/40">
               Menu
-            </h4>
-            <ul className="mt-4 space-y-2">
+            </span>
+            <ul className="mt-5 space-y-3">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
                     onClick={(e) => scrollTo(e, l.href)}
-                    className="text-sm text-zinc-400 transition-colors hover:text-brand-gold"
+                    className="font-display text-lg uppercase tracking-wide text-paper/70 transition-colors hover:text-accent"
                   >
                     {l.label}
                   </a>
@@ -54,47 +51,37 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest text-white">
-              Contact
-            </h4>
-            <ul className="mt-4 space-y-3 text-sm text-zinc-400">
-              <li className="flex gap-2.5">
-                <MapPin className="size-4 shrink-0 text-brand-red" />
-                <span>{site.address}</span>
-              </li>
+          <div className="md:col-span-4">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-paper/40">
+              Get in touch
+            </span>
+            <p className="mt-5 text-sm leading-relaxed text-paper/55">{site.address}</p>
+            <div className="mt-4 space-y-1.5">
               {site.phones.map((p) => (
-                <li key={p.number} className="flex gap-2.5">
-                  <Phone className="size-4 shrink-0 text-brand-red" />
-                  <a href={p.href} className="hover:text-brand-gold">
-                    {p.label}: {p.number}
-                  </a>
-                </li>
-              ))}
-              <li>
                 <a
-                  href={site.facebook}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-1 inline-flex items-center gap-2 rounded-lg bg-[#1877F2] px-3 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  key={p.number}
+                  href={p.href}
+                  className="block font-display text-xl tracking-wide text-paper/80 transition-colors hover:text-accent"
                 >
-                  <FacebookIcon className="size-4" /> Facebook Page
+                  {p.number}
                 </a>
-              </li>
-            </ul>
+              ))}
+            </div>
+            <a
+              href={site.facebook}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 border border-paper/20 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-paper transition-colors hover:border-accent hover:text-accent"
+            >
+              <FacebookIcon className="size-4" /> Facebook
+              <ArrowUpRight className="size-3.5" />
+            </a>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-zinc-500 sm:flex-row">
-          <p>
-            © {new Date().getFullYear()} Four Wheels Zone — Tagburos, Palawan.
-            All rights reserved.
-          </p>
-          <p className="flex items-center gap-1.5">
-            Gawa nang may <Heart className="size-3.5 fill-brand-red text-brand-red" />{" "}
-            para sa Four Wheels Zone
-          </p>
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-paper/12 py-7 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40 sm:flex-row">
+          <p>© {new Date().getFullYear()} Four Wheels Zone — Tagburos, Palawan</p>
+          <p>All rights reserved</p>
         </div>
       </div>
     </footer>
