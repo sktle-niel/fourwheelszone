@@ -1,158 +1,109 @@
-import {
-  Disc3,
-  Droplets,
-  CircleGauge,
-  Wrench,
-  CalendarCheck,
-  Stethoscope,
-  BatteryCharging,
-  Zap,
-  Snowflake,
-  Cog,
-  Car,
-  Gauge,
-  Fuel,
-  Sparkles,
-  ShieldCheck,
-  Hammer,
-} from "lucide-react"
+// ── Photography (used full-bleed as parallax backgrounds, rendered monochrome)
+export const photos = {
+  hero: "/photos/mechanic-ratchet.jpg",
+  craft: "/photos/engine-bay.jpg",
+  oil: "/photos/oil-pour.jpg",
+  rims: "/photos/rims.jpg",
+  wheel: "/photos/wheel-graphic.jpg",
+}
 
-// Pangunahing serbisyo (mula sa banner)
-export const coreServices = [
+// ── Core services (numbered, editorial)
+export const services = [
   {
-    icon: Disc3,
+    n: "01",
     title: "Brakes",
-    desc: "Brake pad, rotor, at caliper service para sigurado ang preno mo sa kalsada.",
+    desc: "Pads, rotors and calipers inspected and replaced so you stop with confidence.",
+    tags: ["Pads", "Rotors", "Calipers"],
   },
   {
-    icon: Droplets,
+    n: "02",
     title: "Oil Change",
-    desc: "Fresh engine oil at filter replacement para malinis at malakas ang makina.",
+    desc: "Fresh engine oil and filters to keep the heart of your car clean and strong.",
+    tags: ["Engine oil", "Filters", "Flush"],
   },
   {
-    icon: CircleGauge,
+    n: "03",
     title: "Tires & Batteries",
-    desc: "Tire fitting, balancing, alignment, at bagong baterya na panalo.",
+    desc: "Fitting, balancing and alignment, plus reliable batteries that start every time.",
+    tags: ["Alignment", "Balancing", "Battery"],
   },
   {
-    icon: Cog,
+    n: "04",
     title: "Suspension",
-    desc: "Shocks, struts, at steering repair para smooth at ligtas ang biyahe.",
+    desc: "Shocks, struts and steering tuned for a ride that stays smooth and safe.",
+    tags: ["Shocks", "Struts", "Steering"],
   },
   {
-    icon: CalendarCheck,
+    n: "05",
     title: "Maintenance",
-    desc: "Regular na PMS at check-up para laging nasa best condition ang sasakyan.",
+    desc: "Scheduled PMS and check-ups that keep every vehicle in its best condition.",
+    tags: ["PMS", "Check-up", "Tune-up"],
   },
   {
-    icon: Stethoscope,
-    title: "Car Diagnostic",
-    desc: "Full computerized scanning para mahanap agad ang ugat ng problema.",
+    n: "06",
+    title: "Diagnostics",
+    desc: "Full computerized scanning to find the root of the problem — fast and precise.",
+    tags: ["Scan", "Electrical", "Engine"],
   },
 ]
 
-// Buong listahan ng auto repair services
-export const repairList = [
-  "Oil Change",
-  "Brake Repair & Inspection",
-  "Tire Services",
-  "Battery Services",
-  "Electrical System Repairs",
-  "Heating & Air Conditioning (A/C)",
-  "Engine Diagnostic Services",
-  "Suspension & Steering Repairs",
-  "Transmission Repair",
-  "Body Shop & Welding",
-  "Lights & Fluids",
-  "Engine Cleaning",
-]
-
-// Specialized / affordable services na may interval
-export const specializedServices = [
-  {
-    icon: ShieldCheck,
-    title: "PMS",
-    subtitle: "Preventive / Periodic Maintenance Service",
-    interval: "Every 10,000 km run",
-  },
-  {
-    icon: Snowflake,
-    title: "Cooling System Restoration",
-    subtitle: "Para hindi mag-overheat ang makina",
-    interval: "Every 2 years (5 years kung brand new)",
-  },
-  {
-    icon: Gauge,
-    title: "Turbo System Cleaning",
-    subtitle: "Panatilihin ang lakas ng turbo",
-    interval: "Every 80,000 – 100,000 km & up",
-  },
-  {
-    icon: Car,
-    title: "Under Chassis",
-    subtitle: "Inspeksyon ng ilalim ng sasakyan",
-    interval: "Upon check-up",
-  },
-  {
-    icon: Droplets,
-    title: "ATF Dialysis",
-    subtitle: "Automatic Transmission Fluid",
-    interval: "Every 80,000 km run",
-  },
-  {
-    icon: Stethoscope,
-    title: "Full System Diagnostic Scanning",
-    subtitle: "Computerized na pag-scan ng buong sistema",
-    interval: "Upon check-up",
-  },
-  {
-    icon: Fuel,
-    title: "EGR System Cleaning",
-    subtitle: "Exhaust Gas Recirculation",
-    interval: "Every 50,000 km run",
-  },
-]
-
+// ── Full capability list
 export const capabilities = [
-  { icon: Stethoscope, label: "Vehicle Health Checks" },
-  { icon: CalendarCheck, label: "Servicing & MOT" },
-  { icon: CircleGauge, label: "Tires & Wheels" },
-  { icon: Cog, label: "Diagnostics" },
-  { icon: Hammer, label: "Body Shop" },
-  { icon: Zap, label: "Welding" },
-  { icon: Snowflake, label: "Air-con Service" },
-  { icon: BatteryCharging, label: "Battery & Electrical" },
-  { icon: Sparkles, label: "Engine Clean" },
-  { icon: Wrench, label: "General Repairs" },
+  "Brake repair & inspection",
+  "Electrical system repairs",
+  "Heating & air-conditioning",
+  "Engine diagnostic services",
+  "Suspension & steering",
+  "Transmission repair",
+  "Body shop & welding",
+  "Lights & fluids",
+  "Engine cleaning",
+  "Vehicle health checks",
 ]
 
-export const whyChooseUs = [
+// ── Specialized maintenance with intervals
+export const maintenance = [
   {
-    icon: ShieldCheck,
-    title: "Alagang Casa",
-    desc: "Tratuhin namin ang sasakyan mo na parang sa amin — maingat at maaasahan.",
+    title: "PMS",
+    sub: "Preventive / Periodic Maintenance Service",
+    interval: "Every 10,000 km",
   },
   {
-    icon: Wrench,
-    title: "Skilled Mechanics",
-    desc: "Sanay at de-kalidad na mga mekaniko para sa lahat ng klaseng sasakyan.",
+    title: "Cooling System Restoration",
+    sub: "Keeps the engine from overheating",
+    interval: "Every 2 years",
   },
   {
-    icon: Stethoscope,
-    title: "Modern Diagnostics",
-    desc: "Computerized scanning tools para tama agad ang diagnosis at solusyon.",
+    title: "Turbo System Cleaning",
+    sub: "Maintains turbo performance",
+    interval: "80,000–100,000 km",
   },
   {
-    icon: Sparkles,
-    title: "Affordable & Trusted",
-    desc: "Sulit na presyo, transparent na serbisyo. Repair · Service · Trusted.",
+    title: "Under Chassis",
+    sub: "Inspection of the vehicle underbody",
+    interval: "Upon check-up",
+  },
+  {
+    title: "ATF Dialysis",
+    sub: "Automatic Transmission Fluid service",
+    interval: "Every 80,000 km",
+  },
+  {
+    title: "Full Diagnostic Scanning",
+    sub: "Computerized full-system scan",
+    interval: "Upon check-up",
+  },
+  {
+    title: "EGR System Cleaning",
+    sub: "Exhaust Gas Recirculation",
+    interval: "Every 50,000 km",
   },
 ]
 
 export const stats = [
-  { value: 7, suffix: "+", label: "Years Serving Palawan" },
-  { value: 20, suffix: "+", label: "Services Offered" },
-  { value: 2000, suffix: "+", label: "Vehicles Repaired" },
+  { value: "07", label: "Years serving Palawan" },
+  { value: "20", label: "Services offered" },
+  { value: "2K", label: "Vehicles repaired" },
 ]
 
 export const site = {
@@ -160,7 +111,7 @@ export const site = {
   tagline: "Alagang Casa",
   slogan: "Repair · Service · Trusted",
   facebook: "https://www.facebook.com/profile.php?id=61590429990361",
-  branchName: "Palawan Branch — Tagburos",
+  branchName: "Palawan — Tagburos",
   address:
     "Purok Silangan, Zone 2, Barangay Tagburos, Puerto Princesa City, Palawan",
   phones: [
@@ -176,8 +127,7 @@ export const site = {
 export const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
-  { label: "Specials", href: "#specials" },
-  { label: "Why Us", href: "#why" },
-  { label: "Location", href: "#location" },
-  { label: "Book Now", href: "#book" },
+  { label: "Maintenance", href: "#maintenance" },
+  { label: "Workshop", href: "#workshop" },
+  { label: "Visit", href: "#visit" },
 ]

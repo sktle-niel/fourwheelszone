@@ -1,105 +1,106 @@
-import { Phone, Wrench, MapPin, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { site } from "@/lib/site"
-
-function scrollTo(e, href) {
-  e.preventDefault()
-  const el = document.querySelector(href)
-  if (el) el.scrollIntoView({ behavior: "smooth" })
-}
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "motion/react"
+import { ArrowDownRight } from "lucide-react"
+import { ParallaxBg, MaskReveal } from "@/components/primitives"
+import { photos, site, stats } from "@/lib/site"
 
 export function Hero() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  })
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"])
+  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden bg-brand-dark pt-24"
+      ref={ref}
+      className="relative flex min-h-svh flex-col justify-end overflow-hidden"
     >
-      {/* Background glows */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-40 top-10 size-[34rem] rounded-full bg-brand-red/25 blur-[120px]" />
-        <div className="absolute -right-32 bottom-0 size-[30rem] rounded-full bg-brand-gold/20 blur-[120px]" />
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "44px 44px",
-          }}
-        />
+      <ParallaxBg
+        src={photos.hero}
+        speed={14}
+        position="center 35%"
+        overlay="bg-gradient-to-b from-ink/80 via-ink/55 to-ink"
+      />
+
+      {/* Vertical meta rail */}
+      <div className="absolute right-5 top-1/2 hidden -translate-y-1/2 sm:right-8 lg:block">
+        <span className="block rotate-90 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.4em] text-paper/50">
+          Tagburos · Puerto Princesa · Palawan
+        </span>
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:items-center">
-        {/* Text */}
-        <div className="text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">
-            <Wrench className="size-3.5" /> {site.slogan}
-          </span>
-
-          <h1 className="mt-6 text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Four <span className="text-brand-red">Wheels</span>
-            <br />
-            <span className="text-brand-gold">Zone</span> Auto Shop
-          </h1>
-
-          <p className="mt-3 text-lg font-semibold uppercase tracking-[0.3em] text-brand-steel">
-            {site.tagline}
-          </p>
-
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-zinc-300 lg:mx-0 sm:text-lg">
-            Maaasahan mong talyer dito sa{" "}
-            <span className="font-semibold text-white">Tagburos, Puerto Princesa</span>.
-            Brakes, oil change, diagnostics, at marami pang serbisyo — alagang
-            casa para sa sasakyan mo.
-          </p>
-
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
-            <Button
-              asChild
-              size="lg"
-              className="w-full bg-brand-red text-base font-bold uppercase tracking-wide text-white hover:bg-brand-red-dark sm:w-auto"
-            >
-              <a href="#book" onClick={(e) => scrollTo(e, "#book")}>
-                <Phone className="size-5" /> Book a Service
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="w-full border-2 border-brand-gold/60 bg-transparent text-base font-bold uppercase tracking-wide text-brand-gold hover:bg-brand-gold hover:text-brand-dark sm:w-auto"
-            >
-              <a href="#services" onClick={(e) => scrollTo(e, "#services")}>
-                View Services
-              </a>
-            </Button>
-          </div>
-
-          <p className="mt-6 flex items-center justify-center gap-2 text-sm text-zinc-400 lg:justify-start">
-            <MapPin className="size-4 text-brand-red" />
-            {site.branchName}
-          </p>
-        </div>
-
-        {/* Logo */}
-        <div className="relative flex items-center justify-center">
-          <div className="absolute size-72 rounded-full bg-gradient-to-br from-brand-red/30 to-brand-gold/20 blur-2xl sm:size-96" />
-          <img
-            src="/logo.png"
-            alt="Four Wheels Zone — Alagang Casa, Repair Service Trusted"
-            className="relative w-64 max-w-full animate-float object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] sm:w-80 lg:w-[26rem]"
-          />
-        </div>
-      </div>
-
-      {/* Scroll cue */}
-      <a
-        href="#services"
-        onClick={(e) => scrollTo(e, "#services")}
-        aria-label="Scroll down"
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 transition-colors hover:text-brand-gold"
+      <motion.div
+        style={{ y: textY, opacity: fade }}
+        className="relative mx-auto w-full max-w-[1400px] px-5 pb-16 sm:px-8 sm:pb-20"
       >
-        <ChevronDown className="size-7 animate-bounce" />
-      </a>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.34em] text-paper/60"
+        >
+          <span className="text-accent">EST. 2019</span>
+          <span className="h-px w-10 bg-paper/30" />
+          {site.tagline}
+        </motion.p>
+
+        <h1 className="font-display text-[clamp(3.2rem,12vw,11rem)] uppercase leading-[0.86] tracking-tight text-paper">
+          <MaskReveal delay={0.15}>Four Wheels</MaskReveal>
+          <MaskReveal delay={0.3} className="text-outline">
+            Zone
+          </MaskReveal>
+        </h1>
+
+        <div className="mt-8 flex flex-col gap-8 border-t border-paper/15 pt-7 sm:flex-row sm:items-end sm:justify-between">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="max-w-md text-sm leading-relaxed text-paper/70 sm:text-base"
+          >
+            A trusted auto-repair workshop in Palawan. Brakes, diagnostics,
+            maintenance and full mechanical care — done with the precision of a
+            casa, the warmth of a neighbor.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.62 }}
+            className="flex shrink-0 items-stretch gap-8"
+          >
+            {stats.map((s) => (
+              <div key={s.label}>
+                <div className="font-display text-4xl text-paper sm:text-5xl">
+                  {s.value}
+                </div>
+                <div className="mt-1 max-w-[8rem] font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-paper/45">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        <motion.a
+          href="#services"
+          onClick={(e) => {
+            e.preventDefault()
+            document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mt-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-paper/60 transition-colors hover:text-accent"
+        >
+          Scroll to explore
+          <ArrowDownRight className="size-4" />
+        </motion.a>
+      </motion.div>
     </section>
   )
 }
