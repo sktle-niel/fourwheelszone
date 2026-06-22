@@ -1,0 +1,11 @@
+# SPA routing for the React build on Apache / LiteSpeed (Hostinger).
+# Real files and folders are served as-is; everything else falls back to
+# index.html so client-side routes like /reviews work on direct load / refresh.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>

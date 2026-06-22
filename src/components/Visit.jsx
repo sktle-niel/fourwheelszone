@@ -4,24 +4,22 @@ import { Reveal, MaskReveal } from "@/components/primitives"
 import { site } from "@/lib/site"
 
 const hours = [
-  { day: "Mon - Sat", time: "8:00 AM - 6:00 PM" },
+  { day: "Mon - Sat", time: "8:00 AM - 9:00 PM" },
   { day: "Sunday", time: "By appointment" },
 ]
 
 export function Visit() {
   return (
     <section id="visit" className="bg-paper text-ink">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
-        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-          <div>
-            <h2 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-7xl">
-              <MaskReveal>One Branch.</MaskReveal>
-              <MaskReveal delay={0.1} className="text-accent">
-                One Palawan.
-              </MaskReveal>
-            </h2>
-          </div>
-          <p className="max-w-sm text-sm leading-relaxed text-ink/60">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 sm:py-24 lg:py-32">
+        <div className="flex flex-col gap-5">
+          <h2 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-7xl">
+            <MaskReveal>One Branch.</MaskReveal>
+            <MaskReveal delay={0.1} className="text-accent">
+              One Palawan.
+            </MaskReveal>
+          </h2>
+          <p className="max-w-xl text-sm leading-relaxed text-ink/60">
             We run a single workshop in Tagburos, Puerto Princesa. No
             franchises, no other locations. Drop by during business hours or
             book ahead.
@@ -75,7 +73,7 @@ export function Visit() {
                     <a
                       key={p.number}
                       href={p.href}
-                      className="group flex items-center justify-between py-3 first:pt-0 last:pb-0"
+                      className="group flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0"
                     >
                       <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
                         {p.label}
@@ -85,6 +83,17 @@ export function Visit() {
                       </span>
                     </a>
                   ))}
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="group flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0"
+                  >
+                    <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                      Email
+                    </span>
+                    <span className="min-w-0 truncate font-mono text-sm text-ink/80 transition-colors group-hover:text-accent">
+                      {site.email}
+                    </span>
+                  </a>
                 </div>
               </div>
 

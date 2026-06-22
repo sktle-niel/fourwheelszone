@@ -1,75 +1,32 @@
-import { useState } from "react"
-import { toast } from "sonner"
-import { ArrowRight, Loader2 } from "lucide-react"
+import { Wrench } from "lucide-react"
 import { Reveal, MaskReveal } from "@/components/primitives"
 import { services, site } from "@/lib/site"
 
-const empty = {
-  name: "",
-  phone: "",
-  vehicle: "",
-  service: "",
-  date: "",
-  message: "",
-}
-
+// Online booking is not live yet. This section previews the upcoming form
+// in a disabled state and routes people to call / message in the meantime.
 const fieldCx =
-  "h-12 w-full border-0 border-b border-paper/20 bg-transparent px-0 font-sans text-base text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-accent [color-scheme:dark]"
+  "h-12 w-full border-0 border-b border-paper/20 bg-transparent px-0 font-sans text-base text-paper/80 outline-none placeholder:text-paper/30 disabled:cursor-not-allowed [color-scheme:dark]"
 
 export function BookingForm() {
-  const [form, setForm] = useState(empty)
-  const [errors, setErrors] = useState({})
-  const [sending, setSending] = useState(false)
-
-  const update = (key) => (e) => {
-    setForm((f) => ({ ...f, [key]: e.target.value }))
-    setErrors((err) => ({ ...err, [key]: undefined }))
-  }
-
-  const validate = () => {
-    const next = {}
-    if (!form.name.trim()) next.name = "Please enter your name."
-    if (!/^[0-9+\s-]{7,}$/.test(form.phone.trim()))
-      next.phone = "Enter a valid contact number."
-    if (!form.service) next.service = "Select a service."
-    setErrors(next)
-    return Object.keys(next).length === 0
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!validate()) {
-      toast.error("A few details are missing", {
-        description: "Please check the highlighted fields.",
-      })
-      return
-    }
-    setSending(true)
-    setTimeout(() => {
-      setSending(false)
-      toast.success(`Thanks, ${form.name.split(" ")[0]}!`, {
-        description: `Your booking for ${form.service} is in. We'll call ${form.phone} to confirm.`,
-        duration: 6000,
-      })
-      setForm(empty)
-    }, 1200)
-  }
-
   return (
     <section id="book" className="relative bg-ink text-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 sm:py-24 lg:py-32">
         <div className="grid gap-14 lg:grid-cols-12">
           {/* Left copy */}
           <div className="lg:col-span-5">
-            <h2 className="font-display text-5xl uppercase leading-[0.88] tracking-tight sm:text-7xl">
+            <span className="inline-flex items-center gap-2 border border-gold/45 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.28em] text-gold">
+              <Wrench className="size-3.5" /> Available soon
+            </span>
+            <h2 className="mt-6 font-display text-5xl uppercase leading-[0.88] tracking-tight sm:text-7xl">
               <MaskReveal>Bring It</MaskReveal>
               <MaskReveal delay={0.1} className="text-accent">
                 In Today
               </MaskReveal>
             </h2>
             <p className="mt-7 max-w-sm text-sm leading-relaxed text-paper/60">
-              Leave your details and we&apos;ll get back to confirm your
-              appointment. Consultation is free. That&apos;s the casa promise.
+              Online booking is on the way, we&apos;re building it right now. For
+              now, just call or message us and we&apos;ll reserve your slot.
+              Consultation is free. That&apos;s the casa promise.
             </p>
 
             <div className="mt-10 space-y-4">
@@ -87,42 +44,41 @@ export function BookingForm() {
                   </span>
                 </a>
               ))}
+              <a
+                href={`mailto:${site.email}`}
+                className="group flex items-baseline gap-4 border-t border-paper/12 pt-4"
+              >
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/45">
+                  Email
+                </span>
+                <span className="min-w-0 truncate font-mono text-sm text-paper/80 transition-colors group-hover:text-accent">
+                  {site.email}
+                </span>
+              </a>
             </div>
           </div>
 
-          {/* Form */}
+          {/* Disabled preview of the upcoming booking form */}
           <Reveal delay={0.1} className="lg:col-span-7">
-            <form onSubmit={handleSubmit} noValidate className="grid gap-7 sm:grid-cols-2">
-              <Field label="Name" error={errors.name} className="sm:col-span-2">
-                <input
-                  value={form.name}
-                  onChange={update("name")}
-                  placeholder="Juan Dela Cruz"
-                  className={fieldCx}
-                />
+            <fieldset
+              disabled
+              aria-label="Online booking form, available soon"
+              className="grid gap-7 opacity-55 sm:grid-cols-2"
+            >
+              <Field label="Name" className="sm:col-span-2">
+                <input placeholder="Juan Dela Cruz" className={fieldCx} />
               </Field>
 
-              <Field label="Contact Number" error={errors.phone}>
-                <input
-                  value={form.phone}
-                  onChange={update("phone")}
-                  inputMode="tel"
-                  placeholder="09XX XXX XXXX"
-                  className={fieldCx}
-                />
+              <Field label="Contact Number">
+                <input inputMode="tel" placeholder="09XX XXX XXXX" className={fieldCx} />
               </Field>
 
               <Field label="Vehicle (Make / Model)">
-                <input
-                  value={form.vehicle}
-                  onChange={update("vehicle")}
-                  placeholder="Toyota Vios 2018"
-                  className={fieldCx}
-                />
+                <input placeholder="Toyota Vios 2018" className={fieldCx} />
               </Field>
 
-              <Field label="Service" error={errors.service}>
-                <select value={form.service} onChange={update("service")} className={fieldCx}>
+              <Field label="Service">
+                <select defaultValue="" className={fieldCx}>
                   <option value="" className="bg-ink">
                     Select a service
                   </option>
@@ -131,52 +87,36 @@ export function BookingForm() {
                       {s.title}
                     </option>
                   ))}
-                  <option value="PMS / Maintenance" className="bg-ink">
-                    PMS / Maintenance
-                  </option>
-                  <option value="Other" className="bg-ink">
-                    Other
-                  </option>
                 </select>
               </Field>
 
               <Field label="Preferred Date">
-                <input
-                  type="date"
-                  value={form.date}
-                  onChange={update("date")}
-                  className={fieldCx}
-                />
+                <input type="date" className={fieldCx} />
               </Field>
 
               <Field label="Additional Details" className="sm:col-span-2">
                 <textarea
-                  value={form.message}
-                  onChange={update("message")}
                   rows={3}
                   placeholder="What's the issue or symptom?"
-                  className="w-full resize-none border-0 border-b border-paper/20 bg-transparent px-0 py-2 font-sans text-base text-paper outline-none transition-colors placeholder:text-paper/30 focus:border-accent"
+                  className="w-full resize-none border-0 border-b border-paper/20 bg-transparent px-0 py-2 font-sans text-base text-paper/80 outline-none placeholder:text-paper/30"
                 />
               </Field>
+            </fieldset>
 
+            <div className="mt-8 flex flex-col items-start gap-4 border-t border-paper/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <button
-                type="submit"
-                disabled={sending}
-                className="group relative col-span-full mt-2 inline-flex items-center justify-center gap-3 overflow-hidden bg-accent px-8 py-5 font-mono text-xs uppercase tracking-[0.3em] text-paper transition-[transform,background-color] duration-300 hover:bg-accent-dark active:scale-[0.99] disabled:opacity-70"
+                type="button"
+                disabled
+                aria-disabled="true"
+                className="inline-flex cursor-not-allowed items-center justify-center gap-3 border border-paper/25 px-8 py-5 font-mono text-xs uppercase tracking-[0.3em] text-paper/55"
               >
-                <span className="relative z-10 flex items-center gap-3">
-                  {sending ? (
-                    <>
-                      <Loader2 className="size-4 animate-spin" /> Sending…
-                    </>
-                  ) : (
-                    <>
-                      Submit Booking <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                    </>
-                  )}
-                </span>
+                <Wrench className="size-4 text-gold" /> Available Soon
               </button>
-            </form>
+              <p className="max-w-[18rem] font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-paper/40">
+                We&apos;re working on it. Tap a number to call or message us in
+                the meantime.
+              </p>
+            </div>
           </Reveal>
         </div>
       </div>
@@ -184,14 +124,13 @@ export function BookingForm() {
   )
 }
 
-function Field({ label, error, children, className }) {
+function Field({ label, children, className }) {
   return (
     <div className={className}>
       <label className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/45">
         {label}
       </label>
       <div className="mt-1">{children}</div>
-      {error && <p className="mt-1.5 font-mono text-[11px] uppercase tracking-wide text-accent">{error}</p>}
     </div>
   )
 }

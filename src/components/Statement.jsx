@@ -11,7 +11,7 @@ export function Statement() {
         overlay="bg-gradient-to-br from-ink/88 via-ink/70 to-accent-dark/35"
       />
 
-      <div className="relative mx-auto w-full max-w-[1400px] px-5 py-28 sm:px-8">
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 py-20 sm:px-8 sm:py-28">
         <Reveal>
           <blockquote className="max-w-4xl font-display text-[clamp(2rem,5.5vw,4.75rem)] uppercase leading-[0.95] tracking-tight text-paper">
             We treat every engine like it&apos;s our own.{" "}

@@ -2,11 +2,12 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react"
 import { ArrowRight } from "lucide-react"
 import { ParallaxBg, MaskReveal } from "@/components/primitives"
-import { photos, site } from "@/lib/site"
+import { photos } from "@/lib/site"
+import { scrollToHash } from "@/lib/smoothScroll"
 
 function scrollTo(e, href) {
   e.preventDefault()
-  document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" })
+  scrollToHash(href)
 }
 
 export function Hero() {
@@ -48,9 +49,9 @@ export function Hero() {
           className="mb-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.34em] text-paper/60"
         >
           <span className="size-1.5 rotate-45 bg-accent" />
-          EST. 2019
+          Auto Repair
           <span className="h-px w-10 bg-paper/25" />
-          <span className="text-gold">{site.tagline}</span>
+          <span className="text-gold">Done Right</span>
         </motion.p>
 
         <h1 className="font-display text-[clamp(3rem,11vw,9.5rem)] uppercase leading-[0.86] tracking-tight text-paper">
@@ -75,12 +76,12 @@ export function Hero() {
             initial={reduce ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.62 }}
-            className="flex shrink-0 flex-wrap items-center gap-3"
+            className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center"
           >
             <a
               href="#book"
               onClick={(e) => scrollTo(e, "#book")}
-              className="group inline-flex items-center gap-2.5 bg-accent px-7 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-paper transition-[transform,background-color] duration-300 hover:bg-accent-dark active:scale-[0.98]"
+              className="group inline-flex w-full items-center justify-center gap-2.5 bg-accent px-7 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-paper transition-[transform,background-color] duration-300 hover:bg-accent-dark active:scale-[0.98] sm:w-auto"
             >
               Book a Service
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -88,7 +89,7 @@ export function Hero() {
             <a
               href="#services"
               onClick={(e) => scrollTo(e, "#services")}
-              className="inline-flex items-center gap-2.5 border border-paper/30 px-7 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-paper/85 transition-colors duration-300 hover:border-gold hover:text-gold"
+              className="inline-flex w-full items-center justify-center gap-2.5 border border-paper/30 px-7 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-paper/85 transition-colors duration-300 hover:border-gold hover:text-gold sm:w-auto"
             >
               View Services
             </a>
