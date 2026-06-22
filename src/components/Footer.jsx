@@ -1,10 +1,11 @@
 import { ArrowUpRight } from "lucide-react"
 import { FacebookIcon } from "@/components/icons"
 import { site, navLinks } from "@/lib/site"
+import { scrollToHash } from "@/lib/smoothScroll"
 
 function scrollTo(e, href) {
   e.preventDefault()
-  document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })
+  scrollToHash(href)
 }
 
 export function Footer() {
@@ -55,7 +56,9 @@ export function Footer() {
             <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-paper/40">
               Get in touch
             </span>
-            <p className="mt-5 text-sm leading-relaxed text-paper/55">{site.address}</p>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/55">
+              {site.address}
+            </p>
             <div className="mt-4 space-y-1.5">
               {site.phones.map((p) => (
                 <a
@@ -66,6 +69,12 @@ export function Footer() {
                   {p.number}
                 </a>
               ))}
+              <a
+                href={`mailto:${site.email}`}
+                className="block break-words font-mono text-sm text-paper/55 transition-colors hover:text-accent"
+              >
+                {site.email}
+              </a>
             </div>
             <a
               href={site.facebook}

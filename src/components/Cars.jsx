@@ -15,7 +15,7 @@ export function Cars() {
 
   return (
     <section id="vehicles" className="relative overflow-hidden bg-ink text-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 sm:py-24 lg:py-32">
         {/* Header */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -62,9 +62,9 @@ export function Cars() {
             {cars.map((car) => (
               <article
                 key={`${car.make}-${car.model}`}
-                className="group w-[78%] shrink-0 snap-start sm:w-[45%] lg:w-[31%]"
+                className="group w-[78%] shrink-0 snap-start transition-transform duration-500 ease-out hover:-translate-y-1.5 sm:w-[45%] lg:w-[31%]"
               >
-                <div className="relative aspect-[4/3] overflow-hidden border border-paper/12 bg-gradient-to-b from-ink-raised to-ink">
+                <div className="relative aspect-[4/3] overflow-hidden border border-paper/12 bg-gradient-to-b from-ink-raised to-ink transition-colors duration-500 group-hover:border-paper/30">
                   <img
                     src={car.img}
                     alt={`${car.make} ${car.model}`}

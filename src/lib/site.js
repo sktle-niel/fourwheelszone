@@ -18,6 +18,9 @@ export const cars = [
   { make: "Toyota", model: "Innova", type: "MPV", img: "/cars/innova.jpg" },
 ]
 
+// Reviews are loaded live from the API (see src/lib/reviewsApi.js) — no seed
+// data lives in the frontend anymore.
+
 // ── Core services (numbered, editorial)
 export const services = [
   {
@@ -25,51 +28,72 @@ export const services = [
     title: "Brakes",
     desc: "Pads, rotors and calipers inspected and replaced so you stop with confidence.",
     tags: ["Pads", "Rotors", "Calipers"],
+    img: "/photos/rims.jpg",
   },
   {
     n: "02",
     title: "Oil Change",
     desc: "Fresh engine oil and filters to keep the heart of your car clean and strong.",
     tags: ["Engine oil", "Filters", "Flush"],
+    img: "/photos/oil-pour.jpg",
   },
   {
     n: "03",
     title: "Tires & Batteries",
     desc: "Fitting, balancing and alignment, plus reliable batteries that start every time.",
     tags: ["Alignment", "Balancing", "Battery"],
+    img: "/photos/wheel-graphic.jpg",
   },
   {
     n: "04",
     title: "Suspension",
     desc: "Shocks, struts and steering tuned for a ride that stays smooth and safe.",
     tags: ["Shocks", "Struts", "Steering"],
+    img: "/photos/engine-bay.jpg",
   },
   {
     n: "05",
     title: "Maintenance",
     desc: "Scheduled PMS and check-ups that keep every vehicle in its best condition.",
     tags: ["PMS", "Check-up", "Tune-up"],
+    img: "/photos/mechanic-ratchet.jpg",
   },
   {
     n: "06",
     title: "Diagnostics",
     desc: "Full computerized scanning to find the root of the problem, fast and precise.",
     tags: ["Scan", "Electrical", "Engine"],
+    img: "/photos/engine-bay.jpg",
   },
 ]
 
-// ── Full capability list
+// ── Full capability list, grouped into clusters
 export const capabilities = [
-  "Brake repair & inspection",
-  "Electrical system repairs",
-  "Heating & air-conditioning",
-  "Engine diagnostic services",
-  "Suspension & steering",
-  "Transmission repair",
-  "Body shop & welding",
-  "Lights & fluids",
-  "Engine cleaning",
-  "Vehicle health checks",
+  {
+    group: "Engine & Drivetrain",
+    items: [
+      "Engine diagnostic services",
+      "Engine cleaning",
+      "Transmission repair",
+      "Suspension & steering",
+    ],
+  },
+  {
+    group: "Electrical & Climate",
+    items: [
+      "Electrical system repairs",
+      "Heating & air-conditioning",
+      "Lights & fluids",
+    ],
+  },
+  {
+    group: "Safety & Body",
+    items: [
+      "Brake repair & inspection",
+      "Body shop & welding",
+      "Vehicle health checks",
+    ],
+  },
 ]
 
 // ── Specialized maintenance with intervals
@@ -111,12 +135,6 @@ export const maintenance = [
   },
 ]
 
-export const stats = [
-  { value: "07", label: "Years serving Palawan" },
-  { value: "20", label: "Services offered" },
-  { value: "2K", label: "Vehicles repaired" },
-]
-
 export const site = {
   name: "Four Wheels Zone",
   tagline: "Alagang Casa",
@@ -125,9 +143,9 @@ export const site = {
   branchName: "Tagburos, Palawan",
   address:
     "Purok Silangan, Zone 2, Barangay Tagburos, Puerto Princesa City, Palawan",
+  email: "marklouie_are_ph@yahoo.com",
   phones: [
-    { label: "Globe", number: "0916 277 6321", href: "tel:09162776321" },
-    { label: "Smart", number: "0969 241 2152", href: "tel:09692412152" },
+    { label: "Globe", number: "0936 951 0201", href: "tel:09369510201" },
   ],
   mapEmbed:
     "https://www.google.com/maps?q=Tagburos,+Puerto+Princesa+City,+Palawan&output=embed",
